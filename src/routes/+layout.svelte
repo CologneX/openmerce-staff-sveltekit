@@ -13,7 +13,7 @@
 	<svelte:fragment slot="sidebarLeft">
 		<Sidebar />
 	</svelte:fragment>
-	<main>
+	<main class=" container">
 		<slot />
 	</main>
 </AppShell>

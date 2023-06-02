@@ -2,11 +2,8 @@ import { goto } from "$app/navigation";
 import { isStaffLoggedInStore } from "./stores";
 
 export const logoutStaff = async () => {
-    const response = await fetch('/api/v1/auth/logout', {
+    const response = await fetch('/api/v1/staff/auth/logout', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
     });
     if (response.ok) {
         localStorage.removeItem('fin_user');

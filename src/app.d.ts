@@ -17,15 +17,15 @@ declare interface StaffCredentials {
 }
 
 declare interface Product {
-	category_id: number;
-	name: string;
-	description: string;
-	price: number;
-	weight: number;
-	initial_stock: number;
-	length: number;
-	width: number;
-	height: number;
+	category_id: number | null;
+	name: string | null;
+	description: string | null;
+	price: number | null;
+	weight: number | null;
+	initial_stock: number | null;
+	length: number | null;
+	width: number | null;
+	height: number | null;
 }
 
 declare interface Category {
@@ -34,4 +34,15 @@ declare interface Category {
 	homepage_visibility: boolean;
 }
 
-
+declare interface ProductEdit {
+	id: string | null;
+	name: string | null;
+	description: string | null;
+	price: number | null;
+	weight: number | null;
+	category_name: string | null;
+	cumulative_review: number | null;
+	image_urls: string[] | FileList[] | null;
+	dimension: string | null;
+	stock: number | null;
+}

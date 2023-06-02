@@ -1,31 +1,16 @@
 <script lang="ts">
 	import Box from '$lib/Icons/Box.svelte';
-	import {
-		AppRail,
-		AppRailAnchor,
-		AppRailTile,
-		LightSwitch,
-		Avatar,
-		Accordion,
-		AccordionItem
-	} from '@skeletonlabs/skeleton';
+	import { AppRail, LightSwitch, Avatar, Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import Logo from '$lib/Icons/Logo.svelte';
 	import Home from '$lib/Icons/Home.svelte';
-	import Login from '$lib/Icons/Login.svelte';
-	import { isStaffLoggedInStore } from '../../routes/utils/stores';
-	import { logoutStaff } from '../../routes/utils/auth';
+	import { isStaffLoggedInStore } from '$lib/utils/stores';
+	import { getStaffUsername, logoutStaff } from '$lib/utils/auth';
 	import Logout from '$lib/Icons/Logout.svelte';
 	let btnClassSidebar = 'flex font-bold text-base px-5 py-5 w-full rounded-sm';
 </script>
 
 <AppRail width="w-64" regionTrail="flex items-center px-10 py-2 justify-center">
-	<!-- <AppRailAnchor href="/" title="Home" selected={$page.url.pathname === '/'}> -->
-
-	<!-- </AppRailAnchor> -->
-	<!-- <AppRailTile>
-
-	</AppRailTile> -->
 	<svelte:fragment slot="lead">
 		<span class="px-10">
 			<Logo height="auto" />
@@ -33,7 +18,7 @@
 		{#if $isStaffLoggedInStore}
 			<div class="flex p-5 font-semibold card">
 				<Avatar initials="JD" rounded="rounded-lg" width="w-10" />
-				<div class="border-2 w-full">&emsp;Nama</div>
+				<div class="w-full">&emsp;&nbsp;{getStaffUsername()}</div>
 			</div>
 		{/if}
 	</svelte:fragment>
@@ -50,7 +35,8 @@
 		</a>
 		<AccordionItem
 			regionControl="font-semibold py-6 {$page.url.pathname === '/add-product' ||
-			$page.url.pathname === '/product-list'
+			$page.url.pathname === '/product-list' ||
+			$page.url.pathname.startsWith('/edit-product')
 				? 'text-primary-500 border-l-4 border-primary-500 px-5'
 				: 'px-6'}"
 		>
@@ -84,11 +70,6 @@
 					class="btn {$page.url.pathname === '/add-category'
 						? 'text-primary-500'
 						: ''} hover:font-semibold">Add Category</a
-				><a
-					href="/category-list"
-					class="btn {$page.url.pathname === '/category-list'
-						? 'text-primary-500'
-						: ''} hover:font-semibold">Category List</a
 				>
 			</svelte:fragment>
 		</AccordionItem>
@@ -124,11 +105,6 @@
 				<span><Logout /></span>
 				<span>Logout</span>
 			</button>
-		{:else}
-			<a href="/login" class="btn btn-sm">
-				<span><Login /></span>
-				<span>Login</span>
-			</a>
 		{/if}
 	</svelte:fragment>
 </AppRail>

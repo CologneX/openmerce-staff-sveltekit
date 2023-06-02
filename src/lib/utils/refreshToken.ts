@@ -1,4 +1,5 @@
 import { logoutStaff } from "./auth";
+import { triggerToast } from "./toast";
 
 export const refreshTokenUser = async () => {
     const response = await fetch('/api/v1/staff/auth/refresh', {
@@ -8,6 +9,7 @@ export const refreshTokenUser = async () => {
         }
     });
     if (response.status == 401) {
-        await logoutStaff();
+        triggerToast('Your session has expired. Please login again.', 'error')
+        logoutStaff();
     }
 };

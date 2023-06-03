@@ -258,27 +258,20 @@
 							</td>
 							<td class="w-1/5" />
 							<td>
-								<label class="label">
-									<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-										<div class="input-group-shim font-bold">Rp</div>
-										<input
-											type="text"
-											placeholder="Enter price..."
-											required
-											bind:value={productDetails.price}
-											on:keypress={(e) => {
-												if (e.key.match(/[^0-9]/g)) {
-													e.preventDefault();
-												}
-											}}
-										/>
-									</div>
-
-									<p class="mt-2 text-sm">
-										Write your product description minimum 260 characters to make it easier for
-										buyers to understand.
-									</p>
-								</label>
+								<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+									<div class="input-group-shim font-bold">Rp</div>
+									<input
+										type="text"
+										placeholder="Enter price..."
+										required
+										bind:value={productDetails.price}
+										on:keypress={(e) => {
+											if (e.key.match(/[^0-9]/g)) {
+												e.preventDefault();
+											}
+										}}
+									/>
+								</div>
 							</td>
 						</tr>
 					</tbody>
@@ -323,12 +316,7 @@
 								</p>
 								<div class="h-4" />
 								<div class=" text-sm">
-									Make sure the product description contains a detailed explanation regarding your
-									product so that buyers can easily understand and find your product.
-									<div class="h-6" />
-									It is recommended not to enter &nbsp;<span class="font-bold">
-										Phone number, e-mail, etc.
-									</span> into product descriptions to protect your personal data.
+									Input weight by weighing product <span class="font-bold"> after packing. </span>
 								</div>
 							</td>
 							<td class="w-1/5" />
@@ -358,7 +346,9 @@
 						<div class="h-16" />
 						<tr>
 							<td class="w-1/5">
-								<p class="font-semibold text-lg">Product Dimensions</p>
+								<p class="font-semibold text-lg">
+									Product Dimensions &nbsp;<span class="badge variant-ghost">Required</span>
+								</p>
 								<div class="h-4" />
 								<div class=" text-sm">
 									Enter the dimensions of your product in <span class="font-bold">centimeter</span>

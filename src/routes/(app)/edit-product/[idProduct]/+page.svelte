@@ -512,12 +512,7 @@
 								</p>
 								<div class="h-4" />
 								<div class=" text-sm">
-									Make sure the product description contains a detailed explanation regarding your
-									product so that buyers can easily understand and find your product.
-									<div class="h-6" />
-									It is recommended not to enter &nbsp;<span class="font-bold">
-										Phone number, e-mail, etc.
-									</span> into product descriptions to protect your personal data.
+									Input weight by weighing product <span class="font-bold"> after packing. </span>
 								</div>
 							</td>
 							<td class="w-1/5" />
@@ -547,7 +542,9 @@
 						<div class="h-16" />
 						<tr>
 							<td class="w-1/5">
-								<p class="font-semibold text-lg">Product Dimensions</p>
+								<p class="font-semibold text-lg">
+									Product Dimensions &nbsp;<span class="badge variant-ghost">Required</span>
+								</p>
 								<div class="h-4" />
 								<div class=" text-sm">
 									Enter the dimensions of your product in <span class="font-bold">centimeter</span>

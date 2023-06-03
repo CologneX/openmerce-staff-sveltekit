@@ -46,8 +46,8 @@
 					product.id.toLowerCase().includes(searchQuery)
 				);
 			});
-			paginator.size = dataProducts.length;
-			paginatedSource = dataProducts.slice(
+			paginator.size = paginatedSource.length;
+			paginatedSource = paginatedSource.slice(
 				paginator.offset * paginator.limit,
 				paginator.offset * paginator.limit + paginator.limit
 			);

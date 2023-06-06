@@ -56,7 +56,7 @@
 
 				<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
 					<div class="input-group-shim">opc-ap1.invisiq.com/</div>
-					<input type="text" class="input" placeholder="Banner Link" bind:value={bannerHref} />
+					<input type="text" class="input" placeholder="Banner Link" bind:value={bannerHref} required/>
 				</div>
 
 				<div class="h-16" />
@@ -72,7 +72,7 @@
 						{#if image}
 							{image.item(0)?.name}
 						{:else}
-							.png .jpg .webp .jpeg
+							.png .jpg .jpeg
 						{/if}</svelte:fragment
 					>
 				</FileDropzone>

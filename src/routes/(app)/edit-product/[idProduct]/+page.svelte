@@ -114,7 +114,7 @@
 				description: productDetails.description,
 				price: Number(productDetails.price),
 				weight: Number(productDetails.weight),
-				initial_stock: Number(productDetails.initial_stock),
+				stock: Number(productDetails.initial_stock),
 				length: Number(productDetails.length),
 				width: Number(productDetails.width),
 				height: Number(productDetails.height)
@@ -125,103 +125,7 @@
 			goto(history.state.from || '/product-list');
 		}
 	};
-	// const handleUpdateProduct = async () => {
-	// 	const response = await fetch('/api/v1/staff/dashboard/inventory/product-1', {
-	// 		method: 'PATCH',
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		},
-	// 		body: JSON.stringify({
-	// 			id: $page.params.idProduct,
-	// 			category_id: Number(productDetails.category_id),
-	// 			name: productDetails.name,
-	// 			description: productDetails.description,
-	// 			price: Number(productDetails.price),
-	// 			weight: Number(productDetails.weight),
-	// 			initial_stock: Number(productDetails.initial_stock),
-	// 			length: Number(productDetails.length),
-	// 			width: Number(productDetails.width),
-	// 			height: Number(productDetails.height)
-	// 		})
-	// 	});
-	// 	if (response.ok) {
-	// 		triggerToast('Product updated successfully', 'success');
-	// 		goto(history.state?.from || history.back());
-	// 		const productID = await response.json();
-	// 		const formData = new FormData();
-	// 		formData.append('product_id', productID.id);
-	// 		for (const images of image) {
-	// 			formData.append('picture', images?.item(0) as File);
-	// 		}
-	// 		const responseImage = await fetch('/api/v1/staff/dashboard/inventory/product-2', {
-	// 			method: 'POST',
-	// 			body: formData
-	// 		});
-	// 		if (responseImage.status === 401) {
-	// 			await refreshTokenUser();
-	// 			const responseImage = await fetch('/api/v1/staff/dashboard/inventory/product-2', {
-	// 				method: 'POST',
-	// 				body: formData
-	// 			});
-	// 		} else if (responseImage.ok) {
-	// 			triggerToast('Product updated successfully', 'success');
-	// 			goto(history.state?.from || history.back());
-	// 		} else if (!responseImage.ok) {
-	// 			triggerToast(responseImage.statusText, 'error');
-	// 		}
-	// 	} else if (response.status === 409) {
-	// 		triggerToast('Product already exists', 'error');
-	// 	} else if (response.status === 401) {
-	// 		await refreshTokenUser();
-	// 		const response = await fetch('/api/v1/staff/dashboard/inventory/product-1', {
-	// 			method: 'PATCH',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			},
-	// 			body: JSON.stringify({
-	// 				id: $page.params.idProduct,
-	// 				category_id: Number(productDetails.category_id),
-	// 				name: productDetails.name,
-	// 				description: productDetails.description,
-	// 				price: Number(productDetails.price),
-	// 				weight: Number(productDetails.weight),
-	// 				initial_stock: Number(productDetails.initial_stock),
-	// 				length: Number(productDetails.length),
-	// 				width: Number(productDetails.width),
-	// 				height: Number(productDetails.height)
-	// 			})
-	// 		});
-	// 		if (response.ok) {
-	// 			const productID = await response.json();
-	// 			const formData = new FormData();
-	// 			formData.append('product_id', productID.id);
-	// 			for (const images of image) {
-	// 				formData.append('picture', images?.item(0) as File);
-	// 			}
-	// 			const responseImage = await fetch('/api/v1/staff/dashboard/inventory/product-2', {
-	// 				method: 'POST',
-	// 				body: formData
-	// 			});
-	// 			if (responseImage.status === 401) {
-	// 				await refreshTokenUser();
-	// 				const responseImage = await fetch('/api/v1/staff/dashboard/inventory/product-2', {
-	// 					method: 'POST',
-	// 					body: formData
-	// 				});
-	// 			} else if (responseImage.ok) {
-	// 				triggerToast('Product updated successfully', 'success');
-	// 				goto(history.state?.from || history.back());
-	// 			} else if (!responseImage.ok) {
-	// 				triggerToast(responseImage.statusText, 'error');
-	// 			}
-	// 		}
-	// 	} else if (!response.ok) {
-	// 		triggerToast(response.statusText, 'error');
-	// 	}
-	// };
 	const handleDeleteImage = async (productID: string, imageURL: string) => {
-		await refreshTokenUser();
-		console.log(productID, imageURL);
 		const response = await fetch('/api/v1/staff/dashboard/inventory/product-2', {
 			method: 'DELETE',
 			headers: {
@@ -234,6 +138,18 @@
 		});
 		if (response.ok) {
 			await fetchProductDetails();
+		} else if (response.status === 401) {
+			await refreshTokenUser();
+			const response = await fetch('/api/v1/staff/dashboard/inventory/product-2', {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					file_name: imageURL,
+					product_id: productID
+				})
+			});
 		} else if (!response.ok) {
 			triggerToast(response.statusText, 'error');
 		}
